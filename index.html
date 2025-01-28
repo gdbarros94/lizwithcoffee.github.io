@@ -6,6 +6,8 @@
     <title>Portfólio - Luize Weschenfelder Araujo</title>
     <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="css/styles.css"> <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="rain.css">
+
     <style>
 
 * {
@@ -50,6 +52,24 @@ body {
     </style>
 </head>
 <body>
+    <div class="rain-container"></div>
+    <script src="rain.js"></script>
+    <script>
+        // Iniciar o efeito de chuva após o carregamento do script
+        window.addEventListener('load', () => {
+            initRain({
+                dropCount: 150,
+                dropColor: '#00a8ff',
+                dropLength: 20,
+                dropSpeed: 2,
+                particleCount: 5,
+                particleSize: 10,
+                particleColor: '#00a8ff',
+                particleDuration: 1,
+                blurAmount: 0 // Configura o efeito de blur
+            });
+        });
+    </script>
     <!-- Cabeçalho -->
     <header>
         <div class="container">
@@ -124,53 +144,5 @@ body {
             <p id="data-hora"></p> <!-- Local onde a data e hora serão exibidas -->
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const body = document.querySelector('body');
-            const contadorElement = document.getElementById('contador');
-            
-            // Função para criar as imagens "caindo"
-            function criarChuva() {
-                const img = document.createElement('img');
-                img.src = 'img/hellohello.png'; // Caminho para a imagem
-                img.className = 'chuva';
-                
-                // Posição inicial aleatória no topo
-                img.style.left = Math.random() * window.innerWidth + 'px';
-                img.style.top = '-100px';
-                
-                // Adiciona ao body
-                body.appendChild(img);
-                
-                // Define a animação
-                setTimeout(() => {
-                    img.remove(); // Remove a imagem quando sair da tela
-                }, 5000); // Remove após 5 segundos
-            }
-
-            // Cria imagens continuamente
-            setInterval(criarChuva, 200); // A cada 200ms cria uma nova
-
-            // Atualiza a data e hora
-            function exibirDataHora() {
-                const agora = new Date();
-                const dataHora = agora.toLocaleString(); // Data e hora no formato local
-                document.getElementById('data-hora').innerText = `Data e Hora: ${dataHora}`;
-            }
-            
-            // Exibir a data e hora a cada segundo
-            setInterval(exibirDataHora, 1000);
-
-            // Contador de visitantes
-            let visitantes = localStorage.getItem('visitantes');
-            if (!visitantes) {
-                visitantes = 0; // Se não existir o contador, inicia com 0
-            }
-            visitantes = parseInt(visitantes) + 1; // Incrementa o contador
-            localStorage.setItem('visitantes', visitantes); // Armazena novamente no localStorage
-            contadorElement.innerText = `Visitantes: ${visitantes}`; // Exibe o contador
-        });
-    </script>
 </body>
 </html>
